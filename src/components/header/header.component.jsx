@@ -2,19 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./header.styles.scss";
+import Logo from "./logo.png";
 
 const Header = () => {
   return (
     <div className="header">
       <div className="header-title">
-        <Link to="/">DrittLeiligheter</Link>
+        <Link to="/">
+          <img src={Logo} className="header-title-logo" alt="logo" />
+        </Link>
       </div>
       <div className="header-links">
         <Link className="header-links-link" to="/about">
-          Om
+          OM
         </Link>
         <Link to="/upload" className="header-links-link">
-          Last Opp
+          LAST OPP
         </Link>
       </div>
     </div>

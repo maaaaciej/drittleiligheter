@@ -5,15 +5,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: white;
 
   .header-links {
-    margin-right: 3%;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    a:hover {
+      color: white;
+      text-decoration: underline;
+    }
 
     .header-links-link {
-      padding-right: 10%;
+      padding-right: 20%;
     }
   }
+
   .header-title {
     margin-left: 3%;
+    .header-title-logo {
+      height: 60px;
+      width: auto;
+    }
   }
 }
