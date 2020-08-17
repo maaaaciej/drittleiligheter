@@ -19,11 +19,11 @@ const Feed = () => {
       {/* <Sorting /> */}
       {posts.length ? (
         posts
-          .sort((a, b) => {
-            const timeA = a.post.posted.seconds;
-            const timeB = b.post.posted.seconds;
-            return timeA > timeB ? -1 : 1;
-          })
+          // .sort((a, b) => {
+          //   const timeA = a.post.posted.seconds;
+          //   const timeB = b.post.posted.seconds;
+          //   return timeA > timeB ? -1 : 1;
+          // })
           .map(({ post, id }) => (
             <Post
               key={id}

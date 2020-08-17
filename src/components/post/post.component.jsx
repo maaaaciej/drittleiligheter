@@ -8,7 +8,7 @@ const Post = ({ renter, city, caption, image }) => {
       <div className="post_header">
         <span>
           <div className="post_header_renter">{renter}</div>
-          <div classname="post_header_adress">{city}</div>
+          <div className="post_header_adress">{city}</div>
         </span>
       </div>
       <img className="post_image" src={image} alt="" />

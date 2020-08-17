@@ -1,18 +1,61 @@
 import React, { useState } from "react";
+import { storage, db } from "../../firebase/firebase";
+import { Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
+import firebase from "firebase";
+
 import "./upload.styles.scss";
 
 const Upload = () => {
-  const [caption, setCaption] = useState("Fortell litt om leiligheten");
-  const [renter, setRenter] = useState("Utleier");
-  const [adress, setAdress] = useState("Adresse");
-  const [city, setCity] = useState("By");
+  const [caption, setCaption] = useState("");
+  const [renter, setRenter] = useState("");
+  const [adress, setAdress] = useState("");
+  const [city, setCity] = useState("");
   const [image, setImage] = useState(null);
 
   const handleImageChange = (e) => {
     e.target.files[0] ? setImage(e.target.files[0]) : console.log("e");
   };
+  const history = useHistory();
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(progress);
+      },
+      (error) => {
+        console.log(error.message);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            db.collection("posts").add({
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              caption,
+              renter,
+              image: url,
+              city,
+              adress,
+            });
 
-  const handleUpload = () => {};
+            setCaption("");
+            setRenter("");
+            setAdress("");
+            setCity("");
+            setImage(null);
+            history.push("/");
+          });
+      }
+    );
+  };
 
   return (
     <div className="upload">
@@ -44,13 +87,15 @@ const Upload = () => {
         />
         <textarea
           className="upload-form-textarea"
+          placeholder="Fortell litt om leiligheten"
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
         />
-        <input type="file" />
-        <button className="upload-form-button" onChange={handleImageChange}>
+        <input type="file" onChange={handleImageChange} />
+        <button className="upload-form-button" onClick={handleUpload}>
           Last Opp
         </button>
+        <img src={image} alt="" />
       </form>
     </div>
   );
