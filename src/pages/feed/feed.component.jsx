@@ -14,16 +14,18 @@ const Feed = () => {
     });
   }, []);
 
+  console.log(posts);
+
   return (
     <div className="feed">
       {/* <Sorting /> */}
       {posts.length ? (
         posts
-          // .sort((a, b) => {
-          //   const timeA = a.post.posted.seconds;
-          //   const timeB = b.post.posted.seconds;
-          //   return timeA > timeB ? -1 : 1;
-          // })
+          .sort((a, b) => {
+            const timeA = a.post.timestamp.seconds;
+            const timeB = b.post.timestamp.seconds;
+            return timeA > timeB ? -1 : 1;
+          })
           .map(({ post, id }) => (
             <Post
               key={id}

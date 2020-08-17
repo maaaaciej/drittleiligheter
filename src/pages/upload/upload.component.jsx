@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { storage, db } from "../../firebase/firebase";
-import { Redirect } from "react-router";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase";
 
@@ -59,11 +58,11 @@ const Upload = () => {
 
   return (
     <div className="upload">
-      <h2 className="upload-title">Last opp din drittleilighet!</h2>
-      <h3 className="upload-caption">
-        Hjelp andre med å slippe å bo i en drittleilighet.
-      </h3>
       <form className="upload-form">
+        <h2 className="upload-title">Last opp din drittleilighet!</h2>
+        <h3 className="upload-caption">
+          Hjelp andre med å slippe å bo i en drittleilighet.
+        </h3>
         <input
           type="text"
           placeholder="Utleier"
@@ -92,10 +91,8 @@ const Upload = () => {
           onChange={(e) => setCaption(e.target.value)}
         />
         <input type="file" onChange={handleImageChange} />
-        <button className="upload-form-button" onClick={handleUpload}>
-          Last Opp
-        </button>
-        <img src={image} alt="" />
+
+        <button onClick={handleUpload}>Last Opp</button>
       </form>
     </div>
   );

@@ -10,8 +10,43 @@
     font-weight: 500;
   }
   .upload-form {
+    width: 60%;
+    padding: 40px;
+    background-color: white;
+    border: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    input {
+      padding: 10px;
+    }
     textarea {
       resize: none;
+      padding-bottom: 30px;
+    }
+    button {
+      margin-top: 3%;
+      padding: 10px;
+      align-self: center;
+      width: 50%;
+      background-color: #fafafa;
+      border: 2px solid #033249;
+      font-weight: bolder;
+    }
+    button:hover {
+      cursor: pointer;
+      background-color: #ffffff;
+      border: 2px solid #ff8135;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .upload {
+    margin-top: 4%;
+    width: 100%;
+    .upload-form {
+      width: 65%;
     }
   }
 }
